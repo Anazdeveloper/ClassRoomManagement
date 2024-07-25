@@ -23,5 +23,6 @@ class AppStrings {
   String doYouWantToDelete = "Do you want to delete";
   String yes = "Yes";
   String no = "No";
+  String age = "Age";
 
 }

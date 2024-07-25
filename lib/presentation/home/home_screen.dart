@@ -2,6 +2,7 @@ import 'package:class_room_management_hamon/presentation/home/widgets/selection_
 import 'package:class_room_management_hamon/presentation/home/widgets/selection_widget.dart';
 import 'package:class_room_management_hamon/utils/app_colors.dart';
 import 'package:class_room_management_hamon/utils/app_icons.dart';
+import 'package:class_room_management_hamon/utils/app_routes.dart';
 import 'package:class_room_management_hamon/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 
@@ -80,7 +81,9 @@ class _HomeScreenState extends State<HomeScreen> {
           icon: AppIcon.studentsIcon,
           name: AppStrings().students,
           color: AppColors.clLightGreen,
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).pushNamed(AppRoutes.studentsPage);
+          },
         ),
         SelectionWidget(
           icon: AppIcon.subjectsIcon,
@@ -111,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
           name: AppStrings().students,
           color: AppColors.clLightGreen,
           onTap: () {
-
+            Navigator.of(context).pushNamed(AppRoutes.studentsPage);
           },
         ),
         const SizedBox(height: 20.0),
