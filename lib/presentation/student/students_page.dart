@@ -1,7 +1,9 @@
+import 'package:class_room_management_hamon/presentation/student/arguments/student_detail_arguments.dart';
 import 'package:class_room_management_hamon/presentation/student/bloc/students_bloc.dart';
 import 'package:class_room_management_hamon/presentation/student/bloc/students_events.dart';
 import 'package:class_room_management_hamon/presentation/student/bloc/students_states.dart';
 import 'package:class_room_management_hamon/presentation/student/widgets/student_list_widget.dart';
+import 'package:class_room_management_hamon/utils/app_routes.dart';
 import 'package:class_room_management_hamon/utils/app_strings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -48,19 +50,19 @@ class _StudentsPageState extends State<StudentsPage> {
               children: [
                 Text(
                   AppStrings().students,
-                  style:
-                      const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w700),
+                  style: const TextStyle(
+                      fontSize: 22.0, fontWeight: FontWeight.w700),
                 ),
               ],
             ),
             BlocBuilder(
                 bloc: _studentBloc,
                 builder: (context, state) {
-                  if(state is InitialLoading) {
+                  if (state is InitialLoading) {
                     return const Center(child: CircularProgressIndicator());
                   }
 
-                  if(state is StudentsListFetched) {
+                  if (state is StudentsListFetched) {
                     final students = state.students.students;
                     return Positioned(
                       top: 50.0,
@@ -69,18 +71,26 @@ class _StudentsPageState extends State<StudentsPage> {
                       bottom: 10.0,
                       child: ListView.separated(
                           itemBuilder: (context, index) {
-                            return StudentListWidget(name: students[index].name, emailId: students[index].email, age: students[index].age);
+                            return StudentListWidget(
+                              name: students[index].name,
+                              emailId: students[index].email,
+                              age: students[index].age,
+                              onTap: () {
+                                Navigator.of(context).pushNamed(
+                                    AppRoutes.studentDetailsPage,
+                                    arguments: StudentDetailArguments(
+                                        student: students[index]));
+                              },
+                            );
                           },
                           separatorBuilder: (context, index) {
                             return const SizedBox(height: 20.0);
                           },
-                          itemCount: students.length
-                      ),
+                          itemCount: students.length),
                     );
                   }
                   return Container();
-                }
-            )
+                })
           ],
         ),
       ),
