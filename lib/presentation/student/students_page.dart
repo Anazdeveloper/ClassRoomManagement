@@ -1,16 +1,18 @@
 import 'package:class_room_management_hamon/presentation/student/arguments/student_detail_arguments.dart';
+import 'package:class_room_management_hamon/presentation/student/arguments/students_page_arguments.dart';
 import 'package:class_room_management_hamon/presentation/student/bloc/students_bloc.dart';
 import 'package:class_room_management_hamon/presentation/student/bloc/students_events.dart';
 import 'package:class_room_management_hamon/presentation/student/bloc/students_states.dart';
 import 'package:class_room_management_hamon/presentation/student/widgets/student_list_widget.dart';
 import 'package:class_room_management_hamon/utils/app_routes.dart';
 import 'package:class_room_management_hamon/utils/app_strings.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class StudentsPage extends StatefulWidget {
-  const StudentsPage({super.key});
+  final StudentsPageArguments arguments;
+
+  const StudentsPage({super.key, required this.arguments});
 
   @override
   State<StudentsPage> createState() => _StudentsPageState();
@@ -76,7 +78,7 @@ class _StudentsPageState extends State<StudentsPage> {
                               emailId: students[index].email,
                               age: students[index].age,
                               onTap: () {
-                                Navigator.of(context).pushNamed(
+                                widget.arguments.isSelection ? widget.arguments.selectStudent?.call(students[index]) : Navigator.of(context).pushNamed(
                                     AppRoutes.studentDetailsPage,
                                     arguments: StudentDetailArguments(
                                         student: students[index]));

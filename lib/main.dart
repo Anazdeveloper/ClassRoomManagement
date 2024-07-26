@@ -1,7 +1,10 @@
 import 'package:class_room_management_hamon/presentation/classrooms/arguments/classroom_detail_arguments.dart';
 import 'package:class_room_management_hamon/presentation/classrooms/classroom_layout_screen.dart';
 import 'package:class_room_management_hamon/presentation/classrooms/classrooms_list_page.dart';
+import 'package:class_room_management_hamon/presentation/registration/new_registration/new_registration_page.dart';
+import 'package:class_room_management_hamon/presentation/registration/registration_page/registration_page.dart';
 import 'package:class_room_management_hamon/presentation/student/arguments/student_detail_arguments.dart';
+import 'package:class_room_management_hamon/presentation/student/arguments/students_page_arguments.dart';
 import 'package:class_room_management_hamon/presentation/student/student_detail_page.dart';
 import 'package:class_room_management_hamon/presentation/student/students_page.dart';
 import 'package:class_room_management_hamon/presentation/subjects/arguments/subject_details_arguments.dart';
@@ -31,11 +34,18 @@ class MyApp extends StatelessWidget {
       home: const HomeScreen(),
       routes: <String, WidgetBuilder> {
         AppRoutes.homeScreen: (context) => const HomeScreen(),
-        AppRoutes.studentsPage: (context) => const StudentsPage(),
-        AppRoutes.classroomsPage: (context) => const ClassRoomsListPage()
+        AppRoutes.classroomsPage: (context) => const ClassRoomsListPage(),
+        AppRoutes.registrationPage: (context) => const RegistrationPage(),
+        AppRoutes.newRegistrationPage: (context) => const NewRegistrationPage()
       },
       onGenerateRoute: (settings) {
         switch (settings.name) {
+          case AppRoutes.studentsPage:
+            return CustomRoute<bool>(
+                builder: (context) =>
+                    StudentsPage(
+                        arguments: settings.arguments as StudentsPageArguments),
+                settings: settings);
           case AppRoutes.studentDetailsPage:
             return CustomRoute<bool>(
                 builder: (context) =>

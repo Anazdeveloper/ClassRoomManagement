@@ -9,4 +9,7 @@ class Urls {
 
   ///Classrooms
   static const classrooms = "${baseUrl}classrooms";
+
+  ///Registration
+  static const registration = "${baseUrl}registration";
 }

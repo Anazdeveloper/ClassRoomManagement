@@ -1,5 +1,6 @@
 import 'package:class_room_management_hamon/presentation/home/widgets/selection_column_widget.dart';
 import 'package:class_room_management_hamon/presentation/home/widgets/selection_widget.dart';
+import 'package:class_room_management_hamon/presentation/student/arguments/students_page_arguments.dart';
 import 'package:class_room_management_hamon/presentation/subjects/arguments/subject_page_arguments.dart';
 import 'package:class_room_management_hamon/utils/app_colors.dart';
 import 'package:class_room_management_hamon/utils/app_icons.dart';
@@ -83,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
           name: AppStrings().students,
           color: AppColors.clLightGreen,
           onTap: () {
-            Navigator.of(context).pushNamed(AppRoutes.studentsPage);
+            Navigator.of(context).pushNamed(AppRoutes.studentsPage, arguments: StudentsPageArguments(isSelection: false));
           },
         ),
         SelectionWidget(
@@ -106,7 +107,9 @@ class _HomeScreenState extends State<HomeScreen> {
           icon: AppIcon.registrationIcon,
           name: AppStrings().registration,
           color: AppColors.clLightYellow,
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).pushNamed(AppRoutes.registrationPage);
+          },
         )
       ],
     );
@@ -119,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
           name: AppStrings().students,
           color: AppColors.clLightGreen,
           onTap: () {
-            Navigator.of(context).pushNamed(AppRoutes.studentsPage);
+            Navigator.of(context).pushNamed(AppRoutes.studentsPage, arguments: StudentsPageArguments(isSelection: false));
           },
         ),
         const SizedBox(height: 20.0),
@@ -143,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
           name: AppStrings().registration,
           color: AppColors.clLightYellow,
           onTap: () {
-
+            Navigator.of(context).pushNamed(AppRoutes.registrationPage);
           },
         ),
       ],
