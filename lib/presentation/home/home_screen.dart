@@ -89,7 +89,9 @@ class _HomeScreenState extends State<HomeScreen> {
           icon: AppIcon.subjectsIcon,
           name: AppStrings().subjects,
           color: AppColors.clLightBlue,
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).pushNamed(AppRoutes.subjectsPage);
+          },
         ),
         SelectionWidget(
           icon: AppIcon.classRoomIcon,
@@ -122,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
           name: AppStrings().subjects,
           color: AppColors.clLightBlue,
           onTap: () {
-
+            Navigator.of(context).pushNamed(AppRoutes.subjectsPage);
           },
         ),
         const SizedBox(height: 20.0),

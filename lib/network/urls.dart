@@ -3,4 +3,7 @@ class Urls {
 
   ///Student
   static const students = "${baseUrl}students";
+
+  ///Subject
+  static const subjects = "${baseUrl}subjects";
 }
