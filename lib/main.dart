@@ -1,7 +1,11 @@
+import 'package:class_room_management_hamon/presentation/classrooms/arguments/classroom_detail_arguments.dart';
+import 'package:class_room_management_hamon/presentation/classrooms/classroom_layout_screen.dart';
+import 'package:class_room_management_hamon/presentation/classrooms/classrooms_list_page.dart';
 import 'package:class_room_management_hamon/presentation/student/arguments/student_detail_arguments.dart';
 import 'package:class_room_management_hamon/presentation/student/student_detail_page.dart';
 import 'package:class_room_management_hamon/presentation/student/students_page.dart';
 import 'package:class_room_management_hamon/presentation/subjects/arguments/subject_details_arguments.dart';
+import 'package:class_room_management_hamon/presentation/subjects/arguments/subject_page_arguments.dart';
 import 'package:class_room_management_hamon/presentation/subjects/subject_details_page.dart';
 import 'package:class_room_management_hamon/presentation/subjects/subject_page.dart';
 import 'package:class_room_management_hamon/utils/app_routes.dart';
@@ -28,7 +32,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder> {
         AppRoutes.homeScreen: (context) => const HomeScreen(),
         AppRoutes.studentsPage: (context) => const StudentsPage(),
-        AppRoutes.subjectsPage: (context) => const SubjectsPage()
+        AppRoutes.classroomsPage: (context) => const ClassRoomsListPage()
       },
       onGenerateRoute: (settings) {
         switch (settings.name) {
@@ -44,7 +48,20 @@ class MyApp extends StatelessWidget {
                     SubjectDetailsPage(
                         arguments: settings.arguments as SubjectDetailsArguments),
                 settings: settings);
+          case AppRoutes.classRoomLayoutScreen:
+            return CustomRoute<bool>(
+                builder: (context) =>
+                    ClassRoomLayoutScreen(
+                        arguments: settings.arguments as ClassRoomDetailArguments),
+                settings: settings);
+          case AppRoutes.subjectsPage:
+            return CustomRoute<bool>(
+                builder: (context) =>
+                    SubjectsPage(
+                        arguments: settings.arguments as SubjectPageArguments),
+                settings: settings);
         }
+        return null;
       },
     );
   }

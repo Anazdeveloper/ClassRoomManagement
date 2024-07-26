@@ -1,4 +1,5 @@
 import 'package:class_room_management_hamon/presentation/subjects/arguments/subject_details_arguments.dart';
+import 'package:class_room_management_hamon/presentation/subjects/arguments/subject_page_arguments.dart';
 import 'package:class_room_management_hamon/presentation/subjects/bloc/subjects_bloc.dart';
 import 'package:class_room_management_hamon/presentation/subjects/bloc/subjects_events.dart';
 import 'package:class_room_management_hamon/presentation/subjects/bloc/subjects_states.dart';
@@ -9,7 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SubjectsPage extends StatefulWidget {
-  const SubjectsPage({super.key});
+  final SubjectPageArguments arguments;
+
+  const SubjectsPage({super.key, required this.arguments});
 
   @override
   State<SubjectsPage> createState() => _SubjectsPageState();
@@ -75,7 +78,7 @@ class _SubjectsPageState extends State<SubjectsPage> {
                                   teacher: subjects[index].teacher,
                                   credit: subjects[index].credits,
                                   onTap: () {
-                                    Navigator.of(context).pushNamed(
+                                    widget.arguments.isSelection ? widget.arguments.selectSubject?.call(subjects[index]) : Navigator.of(context).pushNamed(
                                         AppRoutes.subjectDetailsPage,
                                         arguments: SubjectDetailsArguments(
                                             subject: subjects[index]));

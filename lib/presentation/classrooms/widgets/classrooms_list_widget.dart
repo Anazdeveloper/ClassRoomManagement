@@ -2,13 +2,13 @@ import 'package:class_room_management_hamon/utils/app_colors.dart';
 import 'package:class_room_management_hamon/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 
-class SubjectsListWidget extends StatelessWidget {
+class ClassroomsListWidget extends StatelessWidget {
   final String name;
-  final String teacher;
-  final int credit;
+  final String type;
+  final int seats;
   final void Function() onTap;
 
-  const SubjectsListWidget({super.key, required this.name, required this.teacher, required this.credit, required this.onTap});
+  const ClassroomsListWidget({super.key, required this.name, required this.type, required this.seats, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class SubjectsListWidget extends StatelessWidget {
                         fontSize: 17.0, fontWeight: FontWeight.w400),
                   ),
                   Text(
-                    teacher,
+                    type,
                     style: const TextStyle(
                         fontSize: 13.0, fontWeight: FontWeight.w400),
                   )
@@ -43,12 +43,12 @@ class SubjectsListWidget extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    "$credit",
+                    "$seats",
                     style: const TextStyle(fontSize: 17.0, fontWeight: FontWeight.w400),
                   ),
                   Expanded(
                     child: Text(
-                      AppStrings().credit,
+                      AppStrings().seats,
                       style: const TextStyle(fontSize: 17.0, fontWeight: FontWeight.w400),
                     ),
                   ),
