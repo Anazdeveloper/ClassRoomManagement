@@ -1,5 +1,6 @@
 import 'package:class_room_management_hamon/presentation/home/widgets/selection_column_widget.dart';
 import 'package:class_room_management_hamon/presentation/home/widgets/selection_widget.dart';
+import 'package:class_room_management_hamon/presentation/subjects/arguments/subject_page_arguments.dart';
 import 'package:class_room_management_hamon/utils/app_colors.dart';
 import 'package:class_room_management_hamon/utils/app_icons.dart';
 import 'package:class_room_management_hamon/utils/app_routes.dart';
@@ -90,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
           name: AppStrings().subjects,
           color: AppColors.clLightBlue,
           onTap: () {
-            Navigator.of(context).pushNamed(AppRoutes.subjectsPage);
+            Navigator.of(context).pushNamed(AppRoutes.subjectsPage, arguments: SubjectPageArguments(isSelection: false));
           },
         ),
         SelectionWidget(
@@ -126,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
           name: AppStrings().subjects,
           color: AppColors.clLightBlue,
           onTap: () {
-            Navigator.of(context).pushNamed(AppRoutes.subjectsPage);
+            Navigator.of(context).pushNamed(AppRoutes.subjectsPage, arguments: SubjectPageArguments(isSelection: false));
           },
         ),
         const SizedBox(height: 20.0),
