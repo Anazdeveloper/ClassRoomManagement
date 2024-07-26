@@ -1,3 +1,4 @@
+import 'package:class_room_management_hamon/presentation/classrooms/classrooms_list_page.dart';
 import 'package:class_room_management_hamon/presentation/student/arguments/student_detail_arguments.dart';
 import 'package:class_room_management_hamon/presentation/student/student_detail_page.dart';
 import 'package:class_room_management_hamon/presentation/student/students_page.dart';
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder> {
         AppRoutes.homeScreen: (context) => const HomeScreen(),
         AppRoutes.studentsPage: (context) => const StudentsPage(),
-        AppRoutes.subjectsPage: (context) => const SubjectsPage()
+        AppRoutes.subjectsPage: (context) => const SubjectsPage(),
+        AppRoutes.classroomsPage: (context) => const ClassRoomsListPage()
       },
       onGenerateRoute: (settings) {
         switch (settings.name) {
@@ -45,6 +47,7 @@ class MyApp extends StatelessWidget {
                         arguments: settings.arguments as SubjectDetailsArguments),
                 settings: settings);
         }
+        return null;
       },
     );
   }

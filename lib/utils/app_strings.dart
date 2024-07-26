@@ -24,5 +24,6 @@ class AppStrings {
   String yes = "Yes";
   String no = "No";
   String age = "Age";
+  String seats = "Seats";
 
 }

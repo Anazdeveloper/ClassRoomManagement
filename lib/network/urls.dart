@@ -6,4 +6,7 @@ class Urls {
 
   ///Subject
   static const subjects = "${baseUrl}subjects";
+
+  ///Classrooms
+  static const classrooms = "${baseUrl}classrooms";
 }
