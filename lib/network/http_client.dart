@@ -20,21 +20,6 @@ class CRMHttpClient {
       print("Api Response of $urlPath: $response");
       return HttpResponse.fromJson(response.data, true);
     } on DioException catch (e) {
-      print(e.response);
-      if (e.response?.statusCode == 301 || e.response?.statusCode == 308) {
-        final redirectUrl = e.response?.headers.value('location');
-        if (redirectUrl != null) {
-          final response = await _dio.get(
-            redirectUrl,
-            options: Options(
-              receiveDataWhenStatusError: true,
-              headers: header,
-            ),
-          );
-          print("Redirected response: $response");
-          return HttpResponse.fromJson(response.data, true);
-        }
-      }
       return HttpResponse.withError(e.response?.data, false);
     }
   }

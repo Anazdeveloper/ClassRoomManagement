@@ -1,3 +1,4 @@
+import 'package:class_room_management_hamon/presentation/registration/registration_details/arguments/registration_detail_arguments.dart';
 import 'package:class_room_management_hamon/presentation/registration/registration_page/bloc/registration_page_bloc.dart';
 import 'package:class_room_management_hamon/presentation/registration/registration_page/bloc/registration_page_events.dart';
 import 'package:class_room_management_hamon/presentation/registration/registration_page/bloc/registration_page_states.dart';
@@ -73,11 +74,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         top: 50.0,
                         left: 10.0,
                         right: 10.0,
-                        bottom: 50.0,
+                        bottom: 100.0,
                         child: ListView.separated(
                             itemBuilder: (context, index) {
                               return RegistrationListWidget(
-                                  id: registrations[index].id, onTap: () {});
+                                  id: registrations[index].id,
+                                  onTap: () {
+                                    Navigator.of(context).pushNamed(AppRoutes.registrationDetailsPage, arguments: RegistrationDetailArguments(registration: registrations[index]));
+                                  }
+                              );
                             },
                             separatorBuilder: (context, index) {
                               return const SizedBox(height: 20.0);

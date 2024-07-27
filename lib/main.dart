@@ -2,6 +2,8 @@ import 'package:class_room_management_hamon/presentation/classrooms/arguments/cl
 import 'package:class_room_management_hamon/presentation/classrooms/classroom_layout_screen.dart';
 import 'package:class_room_management_hamon/presentation/classrooms/classrooms_list_page.dart';
 import 'package:class_room_management_hamon/presentation/registration/new_registration/new_registration_page.dart';
+import 'package:class_room_management_hamon/presentation/registration/registration_details/arguments/registration_detail_arguments.dart';
+import 'package:class_room_management_hamon/presentation/registration/registration_details/registration_details_page.dart';
 import 'package:class_room_management_hamon/presentation/registration/registration_page/registration_page.dart';
 import 'package:class_room_management_hamon/presentation/student/arguments/student_detail_arguments.dart';
 import 'package:class_room_management_hamon/presentation/student/arguments/students_page_arguments.dart';
@@ -69,6 +71,12 @@ class MyApp extends StatelessWidget {
                 builder: (context) =>
                     SubjectsPage(
                         arguments: settings.arguments as SubjectPageArguments),
+                settings: settings);
+          case AppRoutes.registrationDetailsPage:
+            return CustomRoute<bool>(
+                builder: (context) =>
+                    RegistrationDetailsPage(
+                        arguments: settings.arguments as RegistrationDetailArguments),
                 settings: settings);
         }
         return null;

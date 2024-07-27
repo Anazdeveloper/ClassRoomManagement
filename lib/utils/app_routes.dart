@@ -8,4 +8,5 @@ class AppRoutes {
   static const String classRoomLayoutScreen = '/classroom_layout_screen';
   static const String registrationPage = '/registration_page';
   static const String newRegistrationPage = '/new_registration_page';
+  static const String registrationDetailsPage = '/registration_details_page';
 }
