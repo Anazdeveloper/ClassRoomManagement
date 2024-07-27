@@ -78,7 +78,9 @@ class _ClassRoomsListPageState extends State<ClassRoomsListPage> {
                                 Navigator.of(context).pushNamed(
                                         AppRoutes.classRoomLayoutScreen,
                                         arguments: ClassRoomDetailArguments(
-                                            classroom: classrooms[index]));
+                                            classroom: classrooms[index])).then((shouldReload) {
+                                  _classRoomsBloc.add(GetClassrooms());
+                                });
                               },
                             );
                           },

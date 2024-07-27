@@ -25,5 +25,6 @@ class AppStrings {
   String no = "No";
   String age = "Age";
   String seats = "Seats";
-
+  String registrationId = "Registration id";
+  String registerAlert = "Please select a subject and student";
 }
