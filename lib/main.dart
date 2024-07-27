@@ -1,5 +1,5 @@
 import 'package:class_room_management_hamon/presentation/classrooms/arguments/classroom_detail_arguments.dart';
-import 'package:class_room_management_hamon/presentation/classrooms/classroom_layout_screen.dart';
+import 'package:class_room_management_hamon/presentation/classrooms/class_room_layout/classroom_layout_screen.dart';
 import 'package:class_room_management_hamon/presentation/classrooms/classrooms_list_page.dart';
 import 'package:class_room_management_hamon/presentation/registration/new_registration/new_registration_page.dart';
 import 'package:class_room_management_hamon/presentation/registration/registration_details/arguments/registration_detail_arguments.dart';

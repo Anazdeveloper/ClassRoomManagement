@@ -1,5 +1,8 @@
 import 'package:class_room_management_hamon/data/models/response/subjects.dart';
 import 'package:class_room_management_hamon/presentation/classrooms/arguments/classroom_detail_arguments.dart';
+import 'package:class_room_management_hamon/presentation/classrooms/class_room_layout/bloc/classroom_layout_bloc.dart';
+import 'package:class_room_management_hamon/presentation/classrooms/class_room_layout/bloc/classroom_layout_events.dart';
+import 'package:class_room_management_hamon/presentation/classrooms/class_room_layout/bloc/classroom_layout_states.dart';
 import 'package:class_room_management_hamon/presentation/subjects/arguments/subject_page_arguments.dart';
 import 'package:class_room_management_hamon/presentation/subjects/subject_page.dart';
 import 'package:class_room_management_hamon/utils/app_colors.dart';
@@ -7,6 +10,7 @@ import 'package:class_room_management_hamon/utils/app_icons.dart';
 import 'package:class_room_management_hamon/utils/app_strings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class ClassRoomLayoutScreen extends StatefulWidget {
@@ -21,6 +25,16 @@ class ClassRoomLayoutScreen extends StatefulWidget {
 class _ClassRoomLayoutScreenState extends State<ClassRoomLayoutScreen> {
   late Subject selectedSubject;
   bool isSubjectSelected = false;
+  late String subjectName;
+  bool isInitial = false;
+
+  final _classroomLayoutBloc = ClassroomLayoutBloc();
+
+  @override
+  void initState() {
+    _classroomLayoutBloc.add(GetClassroomDetails(id: widget.arguments.classroom.id));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +47,7 @@ class _ClassRoomLayoutScreenState extends State<ClassRoomLayoutScreen> {
                 color: Colors.black,
               ),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.of(context).pop(true);
               },
             ),
           ),
@@ -56,7 +70,53 @@ class _ClassRoomLayoutScreenState extends State<ClassRoomLayoutScreen> {
                     top: 50.0,
                     left: 15.0,
                     right: 15.0,
-                    child: subjectTile()
+                    child: BlocListener(
+                      bloc: _classroomLayoutBloc,
+                      listener: (context, state) {
+                        if(state is ClassroomDetailsFetched) {
+                          Navigator.of(context).pop();
+                          setState(() {
+                            if(state.fetchedSubject != null) {
+                              selectedSubject = state.fetchedSubject!;
+                              isSubjectSelected = true;
+                            }
+                          });
+                        }
+
+                        if(state is Updated) {
+                          Navigator.of(context).pop();
+                          Fluttertoast.showToast(
+                              msg: AppStrings().subjectUpdated,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              textColor: AppColors.clDarkGreen,
+                              backgroundColor: AppColors.clLightGreen,
+                              toastLength: Toast.LENGTH_LONG
+                          );
+                        }
+
+                        if(state is UpdateFailed) {
+                          Navigator.of(context).pop();
+                          Fluttertoast.showToast(
+                              msg: state.error.message ?? "Update failed",
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              textColor: AppColors.clDarkGreen,
+                              backgroundColor: AppColors.clLightGreen,
+                              toastLength: Toast.LENGTH_LONG
+                          );
+                        }
+
+                        if(state is UpdateInitiated) {
+                          loadingDialog();
+                        }
+
+                        if(state is ClassroomInitialLoading) {
+                          loadingDialog();
+                        }
+                      },
+                      child: subjectTile(),
+                    )
                 ),
                 widget.arguments.classroom.layout == "conference" ? Positioned(
                     top: 200.0,
@@ -182,15 +242,9 @@ class _ClassRoomLayoutScreenState extends State<ClassRoomLayoutScreen> {
                                 setState(() {
                                   selectedSubject = subject;
                                   isSubjectSelected = true;
+                                  _classroomLayoutBloc.add(UpdateClassroomDetails(id: widget.arguments.classroom.id, subjectId: subject.id));
                                 });
-                                Fluttertoast.showToast(
-                                    msg: AppStrings().subjectUpdated,
-                                    gravity: ToastGravity.BOTTOM,
-                                    timeInSecForIosWeb: 1,
-                                    textColor: AppColors.clDarkGreen,
-                                    backgroundColor: AppColors.clLightGreen,
-                                    toastLength: Toast.LENGTH_LONG
-                                );
+
                               }
                           )
                       );
@@ -227,15 +281,9 @@ class _ClassRoomLayoutScreenState extends State<ClassRoomLayoutScreen> {
                                 setState(() {
                                   selectedSubject = subject;
                                   isSubjectSelected = true;
+                                  _classroomLayoutBloc.add(UpdateClassroomDetails(id: widget.arguments.classroom.id, subjectId: subject.id));
                                 });
-                                Fluttertoast.showToast(
-                                    msg: AppStrings().subjectUpdated,
-                                    gravity: ToastGravity.BOTTOM,
-                                    timeInSecForIosWeb: 1,
-                                    textColor: AppColors.clDarkGreen,
-                                    backgroundColor: AppColors.clLightGreen,
-                                    toastLength: Toast.LENGTH_LONG
-                                );
+
                               }
                             )
                         );
@@ -255,4 +303,23 @@ class _ClassRoomLayoutScreenState extends State<ClassRoomLayoutScreen> {
       ),
     );
   }
+
+  loadingDialog() {
+    showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (BuildContext context) {
+        // dialogContext = context;
+        return const Dialog(
+          child: SizedBox(
+            height: 100.0,
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
 }

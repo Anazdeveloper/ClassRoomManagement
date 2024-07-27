@@ -49,4 +49,17 @@ class CRMHttpClient {
       return HttpResponse.withError(e.response?.data, false);
     }
   }
+
+  Future<HttpResponse> patch({urlPath, body, header, queryParameters}) async {
+    try {
+      Response response = await _dio.patch(urlPath,
+          queryParameters: queryParameters,
+          options: Options(receiveDataWhenStatusError: true, headers: header));
+      print("Api Response of $urlPath: $response");
+      return HttpResponse.fromJson(response.data, true);
+    } on DioException catch (e) {
+      print(e.response);
+      return HttpResponse.withError(e.response?.data, false);
+    }
+  }
 }
